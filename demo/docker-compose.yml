@@ -2,6 +2,10 @@ version: '3'
 
 services:
   tele:
+    logging:
+      driver: none
+    healthcheck:
+      disable: true
     image: mlan/asterisk
     network_mode: bridge                    # Only here to help testing
     cap_add:
@@ -24,6 +28,7 @@ services:
       - tele-conf:/srv                      # Persistent storage
       - ./pulse:/run/pulse:rshared          # Use host audio
       - /etc/localtime:/etc/localtime:ro    # Use host timezone
+      - ./canary.tweet:/run/asterisk/alt.asterisk.canary.tweet.tweet.tweet 
 
 volumes:
   tele-conf:                                # Persistent storage
