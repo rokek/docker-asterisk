@@ -20,14 +20,17 @@ services:
       - "10000-10099:10000-10099/udp"       # RTP ports
     environment:
       - SYSLOG_LEVEL=${SYSLOG_LEVEL-4}      # Logging
+      - DOCKER_HOST_IP=${DOCKER_HOST_IP}
+      - DOMAIN=${DOMAIN}
       - HOSTNAME=${TELE_SRV-tele}.${DOMAIN-docker.localhost}
       - PULSE_SERVER=unix:/run/pulse/socket # Use host audio
       - PULSE_COOKIE=/run/pulse/cookie      # Use host audio
       - WEBSMSD_PORT=${WEBSMSD_PORT-80}     # WEBSMSD internal port
     volumes:
       - tele-conf:/srv                      # Persistent storage
-      - ./pulse:/run/pulse:rshared          # Use host audio
+#      - ./pulse:/run/pulse:rshared          # Use host audio
       - /etc/localtime:/etc/localtime:ro    # Use host timezone
+      - ./asterisk:/etc/asterisk
       - ./canary.tweet:/run/asterisk/alt.asterisk.canary.tweet.tweet.tweet 
 
 volumes:
