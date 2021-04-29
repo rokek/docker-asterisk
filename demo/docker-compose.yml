@@ -2,8 +2,8 @@ version: '3'
 
 services:
   tele:
-    logging:
-      driver: none
+          #    logging:
+          #      driver: none
     healthcheck:
       disable: true
     image: mlan/asterisk
